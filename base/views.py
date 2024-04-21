@@ -160,3 +160,9 @@ def updateUser(request):
             messages.error(request, 'An error occurred during updating')
     context = {'form': form}
     return render(request, 'base/update-user.html', context)
+
+def topicPage(request):
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    topics = Topic.objects.filter(name__icontains=q)
+    context = {'topics': topics}
+    return render(request, 'base/topics.html', context)
